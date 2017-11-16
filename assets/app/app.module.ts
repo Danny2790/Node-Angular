@@ -1,3 +1,5 @@
+import { routing } from './app.routing';
+import { Route } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { AuthenticationComponent } from './auth/authentication.component';
 import { NgModule } from '@angular/core';
@@ -21,7 +23,7 @@ import { MessagesComponent } from './messages/messages.component';
         AuthenticationComponent,
         HeaderComponent
     ],
-    imports: [BrowserModule, FormsModule],
+    imports: [BrowserModule, FormsModule, routing],
     bootstrap: [AppComponent]
 })
 export class AppModule {
