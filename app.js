@@ -10,7 +10,7 @@ var appRoutes = require('./routes/app');
 var messageRoutes = require('./routes/messages');
 
 var app = express();
-mongoose.connect('mongodb://localhost:27017/admin',{ useMongoClient: true })
+mongoose.connect('mongodb://localhost:27017/dbmessage',{ useMongoClient: true })
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
