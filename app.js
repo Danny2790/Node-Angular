@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
 var appRoutes = require('./routes/app');
+var messageRoutes = require('./routes/messages');
 
 var app = express();
 mongoose.connect('mongodb://localhost:27017/admin',{ useMongoClient: true })
@@ -28,6 +30,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/message', messageRoutes); // write before the default '/' router so that request first should come to '/message'
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
