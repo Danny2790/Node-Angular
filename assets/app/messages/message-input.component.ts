@@ -15,7 +15,17 @@ export class MessageInputComponent {
 
     onSubmit(form : NgForm){
         const message = new Message(form.value.content, 'akash');
-        this.messageService.addMessage(message);
+        this.messageService.addMessage(message)
+            .subscribe(
+                data => console.log(data),
+                error => console.error(error)
+            );
+        //  data => console.log(data) -> this Es6 typescript ayntax
+        //subscribe will get three callbacks
+        // 1. success callback
+        // 2. error callback
+        // 3. observable completion callback (if getting data from request is comoplete)
+
         form.resetForm();
     }
 }
