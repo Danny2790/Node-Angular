@@ -2,11 +2,10 @@ var express = require("express");
 var router = express.Router();
 var Message = require("../models/message");
 
-// As messages route already on '/message' we need to add only '/'
+// As messages route already on /message
 router.post('/', function(req, res, next){
     var message = new Message({
-        content : req.body.content,
-
+        content : req.body.content
     });
     message.save(function(err,result){
         if(err){
