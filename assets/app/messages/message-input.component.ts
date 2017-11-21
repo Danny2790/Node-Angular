@@ -21,12 +21,17 @@ export class MessageInputComponent implements OnInit{
     }
 
     onSubmit(form : NgForm){
-        const message = new Message(form.value.content, 'akash');
-        this.messageService.addMessage(message)
-            .subscribe(
-                data => console.log(data),
-                error => console.error(error)
-            );
+        if(this.message){
+            this.message.content = form.value.content;
+            this.message = null;
+        }else {
+            const message = new Message(form.value.content, 'akash');
+            this.messageService.addMessage(message)
+                .subscribe(
+                    data => console.log(data),
+                    error => console.error(error)
+                );    
+        }
         //  data => console.log(data) -> this Es6 typescript ayntax
         //subscribe will get three callbacks
         // 1. success callback
@@ -35,8 +40,9 @@ export class MessageInputComponent implements OnInit{
 
         form.resetForm();
     }
-    
+
     onClear(form : NgForm){
+        this.message = null;
         form.resetForm();
     }
 }

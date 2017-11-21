@@ -18,7 +18,6 @@ import { Message } from "./message.model";
 
 export class MessageComponent {
     @Input() message : Message;
-    color = "red";
 
     constructor(private messageService: MessageService){}
 
