@@ -2,6 +2,25 @@ var express = require("express");
 var router = express.Router();
 var Message = require("../models/message");
 
+router.get('/', function(req,res,next){
+    Message.find()
+        .exec(function(err, messages){
+            if(err){
+                if(err){
+                    return res.status(500).json({
+                        title : "An error occured",
+                        error : err
+                    });
+                }    
+            }
+            console.log('messages query ' + messages);
+            res.status(200).json({
+                message : 'success',
+                obj : messages
+            });
+        })
+});
+
 // As messages route already on /message
 router.post('/', function(req, res, next){
     var message = new Message({
