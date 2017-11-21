@@ -5,10 +5,11 @@
             <input  type="text"
                     id="content" 
                     class="form-control" 
-                    ngModel
+                    [ngModel] = "message?.content"
                     name="content"
                     required>
         </div>
-        <Button class="btn btn-primary" type="submit">Save</Button>
+        <button class="btn btn-danger" type="button" (Click)= "onClear(f)">Clear</button>
+        <button class="btn btn-primary" type="submit">Save</button>
     </form>
 </div>

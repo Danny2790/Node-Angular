@@ -1,5 +1,5 @@
 import { MessageService } from './message.service';
-import { Component, Input, Output, EventEmitter }  from '@angular/core';
+import { Component, Input}  from '@angular/core';
 
 import { Message } from "./message.model";
 
@@ -18,14 +18,12 @@ import { Message } from "./message.model";
 
 export class MessageComponent {
     @Input() message : Message;
-    @Output() editClicked = new EventEmitter<string>();
-
     color = "red";
 
     constructor(private messageService: MessageService){}
 
     onEdit(){
-        this.editClicked.emit("set new value to text");
+        this.messageService.editMessage(this.message);
     }
 
     onDelete(){

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { MessageService } from './message.service';
@@ -9,10 +9,16 @@ import { Message } from './message.model';
     templateUrl : './message-input.component.html'
 })
 
-export class MessageInputComponent{
+export class MessageInputComponent implements OnInit{
+    message : Message;
 
     constructor(private messageService : MessageService){ }
-
+    
+    ngOnInit(){
+        this.messageService.messageIsEdit.subscribe(
+            (message : Message) => this.message = message
+        );
+    }
 
     onSubmit(form : NgForm){
         const message = new Message(form.value.content, 'akash');
@@ -27,6 +33,10 @@ export class MessageInputComponent{
         // 2. error callback
         // 3. observable completion callback (if getting data from request is comoplete)
 
+        form.resetForm();
+    }
+    
+    onClear(form : NgForm){
         form.resetForm();
     }
 }

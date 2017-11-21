@@ -1,5 +1,5 @@
 import { Http, Response, Headers } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 
@@ -9,6 +9,7 @@ import { Message } from './message.model'
 @Injectable()
 export class MessageService {
     private messages : Message[] = [];
+    messageIsEdit = new EventEmitter<Message>();
 
     constructor(private http : Http){}
     
@@ -47,6 +48,10 @@ export class MessageService {
             .catch((error : Response) => Observable.throw(error.json()));
             //catch by default doesnt send obervable so we need to explicitly send observale throw with error as json
             //return this.messages;
+    }
+    
+    editMessage(message : Message){
+        this.messageIsEdit.emit(message);
     }
 
     deleteMessage(message : Message){
