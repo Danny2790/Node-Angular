@@ -30,7 +30,23 @@ export class MessageService {
     }
 
     getMessages(){
-        return this.messages;
+        const headers = new Headers({
+            'Content-Type' : 'application/json'
+        });
+        return this.http.get('http://localhost:3000/message',{headers : headers})
+            .map((response: Response) => {
+                const messages = response.json().obj;
+                let transformedMessages: Message[] = [];
+                for(let message of messages){
+                    transformedMessages.push(new Message(message.content, 'Dummy', message.id));
+                }
+                this.messages = transformedMessages;
+                return transformedMessages;
+            }) 
+            // to send the observable with response as jsontype 
+            .catch((error : Response) => Observable.throw(error.json()));
+            //catch by default doesnt send obervable so we need to explicitly send observale throw with error as json
+            //return this.messages;
     }
 
     deleteMessage(message : Message){
